@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+	<h2>Tasks</h2>
+</head>
+<body>		
+	<form data-bind="submit: addTask">
+		<input type="checkbox" data-bind="checked: globalChecked" />
+		Add task: <input data-bind="value: newTaskText" placeholder="What to do?"/>
+		<button id="addBtn" type="submit">Add</button>
+	</form>
+
+	<ul data-bind="foreach: filteredTasks, visible: filteredTasks().length > 0">
+	    <li>
+	        <input type="checkbox" data-bind="checked: isDone" />
+	        <input data-bind="value: title, disable: isDone" />
+	        <a href='#' data-bind="click: $parent.removeTask">Delete</a>
+		</li> 
+	</ul>
+
+	<a href='#' data-bind="click: updateFilter('all')">All</a>
+	<a href='#' data-bind="click: updateFilter('inWork')">In Work</a>
+	<a href='#' data-bind="click: updateFilter('completed')">Completed</a>
+	<a href='#' data-bind="click: clearCompleted">Clear Completed</a>
+	</br>
+	You have <b data-bind="text: incompleteTasksCount()"></b> incomplete task(s)
+
+	<script type="text/javascript" src="http://knockoutjs.com/downloads/knockout-3.2.0.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.js"></script>	
+	
+	<script type="text/javascript" src="js/viewModels/tasks.js"></script>
+</body>
+</html>
